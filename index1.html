@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Food Bot</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+    }
+
+    .chatbox {
+      width: 350px;
+      margin: 20px auto;
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    #chat {
+      height: 260px;
+      overflow-y: auto;
+      padding: 5px;
+    }
+
+    .bot {
+      background: #e6e6e6;
+      padding: 8px 12px;
+      margin: 6px 0;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 80%;
+      clear: both;
+    }
+
+    .user {
+      background: rgb(241, 142, 160);
+      color: white;
+      padding: 8px 12px;
+      margin: 6px 0;
+      border-radius: 10px;
+      text-align: right;
+      margin-left: auto;
+      display: block;
+      max-width: 80%;
+      clear: both;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .option {
+      background: rgb(249, 199, 81);
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .option:hover {
+      background: rgb(242, 139, 15);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="chatbox">
+  <div id="chat"></div>
+
+  <div id="options" class="grid">
+    <div class="option" onclick="selectMood('stressed')">😓 Stressed</div>
+    <div class="option" onclick="selectMood('bored')">😐 Bored</div>
+    <div class="option" onclick="selectMood('happy')">😊 Happy</div>
+    <div class="option" onclick="selectMood('tired')">😴 Tired</div>
+  </div>
+</div>
+
+<script>
+
+let currentMood = "";
+
+// MESSAGE FUNCTION (FIXED ALIGNMENT)
+function addMessage(text, type) {
+  let chat = document.getElementById("chat");
+
+  let div = document.createElement("div");
+  div.className = type;
+
+  div.innerHTML = text;
+
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// START
+addMessage("Welcome", "bot");
+
+addMessage("Suggestion that suits your to mood 👇", "bot");
+
+// MOOD SELECT
+function selectMood(mood) {
+  currentMood = mood;
+
+  addMessage(mood, "user");
+
+
+// MOOD SELECT + mood, "bot");
+
+  showFood(false);
+}
+
+// FOOD SYSTEM
+function showFood(more) {
+  let food = "";
+
+  if(currentMood === "stressed"){
+    food = more ? "🍟 Fries, 🍔 Burger, 🍩 Donut"
+                : "🍫 Chocolate, 🍕 Pizza, 🍦 Ice Cream";
+  }
+  else if(currentMood === "bored"){
+    food = more ? "🌮 Tacos, 🍜 Noodles, 🥪 Sandwich"
+                : "🍔 Burger, 🍿 Popcorn, 🍟 Fries";
+  }
+  else if(currentMood === "happy"){
+    food = more ? "🍗 Chicken, 🍝 Pasta, 🧁 Cupcake"
+                : "🍕 Pizza, 🍦 Ice Cream, 🍰 Cake";
+  }
+  else if(currentMood === "tired"){
+    food = more ? "🍵 Tea, 🥜 Nuts, 🍎 Apple"
+                : "☕ Coffee, 🍌 Banana, 🥪 Sandwich";
+  }
+
+  addMessage("🍽️ <b>Food Suggestions:</b><br>" + food, "bot");
+
+  document.getElementById("options").innerHTML = `
+    <div class="option" onclick="showFood(true)">More Options</div>
+    <div class="option" onclick="askBinge()">Next</div>
+  `;
+}
+
+// BINGE ASK
+function askBinge() {
+  addMessage("Binge mood activate karein? 🍿", "bot");
+
+  document.getElementById("options").innerHTML = `
+    <div class="option" onclick="binge(false)">No</div>
+    <div class="option" onclick="binge(true)">Yes</div>
+  `;
+}
+
+
+function binge(ans){
+
+  if(ans === true){
+    document.getElementById("options").innerHTML = `
+      <div class="option" onclick="showMovies('Comedy')">Comedy 😂</div>
+      <div class="option" onclick="showMovies('Horror')">Horror 😱</div>
+      <div class="option" onclick="showMovies('Action')">Action 🔥</div>
+    `;
+  } 
+  else if(ans === false){
+    addMessage("🍽️ Enjoy your meal 😄", "bot");
+    document.getElementById("options").innerHTML = "";
+  }
+
+}
+// MOVIES
+function showMovies(genre) {
+  let movies = "";
+
+  if(genre === "Comedy"){
+    movies = "Hera Pheri, Golmaal";
+  }
+  else if(genre === "Horror"){
+    movies = "Stree, Conjuring";
+  }
+  else if(genre === "Action"){
+    movies = "War, Pathaan";
+  }
+
+  addMessage( movies, "bot");
+  
+
+  document.getElementById("options").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>
