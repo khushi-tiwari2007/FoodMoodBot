@@ -10,6 +10,9 @@ HTML/CSS/JavaScript
 2)Deploy as a live web app
 3)Add user login and history feature
 4) make UI more intreactive and attractive
+# How to Run
+1. Repository clone karo git clone https://github.com/your-username/food-mood-bot
+
 # AUTHOR
 khushi tiwari
 
