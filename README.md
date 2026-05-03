@@ -11,7 +11,7 @@ HTML/CSS/JavaScript
 3)Add user login and history feature
 4) make UI more intreactive and attractive
 # How to Run
-1. Repository clone karo git clone https://github.com/your-username/food-mood-bot
+1. Repository clone karo git clone https://github.com/khushi-tiwari2007/FoodMoodBot.git
 
 # AUTHOR
 khushi tiwari
